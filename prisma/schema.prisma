@@ -10,12 +10,24 @@ datasource db {
     url = env("DATABASE_URL")
     relationMode = "prisma"
 
+// Previously project was intialized for sqlite
     // provider = "sqlite"
     // url      = env("DATABASE_URL")
 }
 
-model Example {
+// This is just an example. No need in Production
+// model Example {
+//     id        String   @id @default(cuid())
+//     createdAt DateTime @default(now())
+//     updatedAt DateTime @updatedAt
+// }
+
+
+model Post {
     id        String   @id @default(cuid())
     createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    content String @db.VarChar(255)
+    authorID String
+    @@index([authorID]) 
+    // updatedAt DateTime @updatedAt
 }
